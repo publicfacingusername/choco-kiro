@@ -1,6 +1,6 @@
 ﻿$ErrorActionPreference = 'Stop'
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$url        = 'https://prod.download.desktop.kiro.dev/releases/202507232058-Kiro-win32-x64.exe'
+$url        = 'https://prod.download.desktop.kiro.dev/releases/202508020313-Kiro-win32-x64.exe'
 
 $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
@@ -8,7 +8,7 @@ $packageArgs = @{
   fileType      = 'exe'
   url           = $url
   softwareName  = 'Kiro*'
-  checksum      = '85C39886ADAFE36BEEB41EDF4EF794473541BD2C200B73D8D0166F5DEDE5CB99'
+  checksum      = 'C8C5F4A4817F7823BC6B3287C406EB7DA3347922F4139AC477406EB50E6FDE36'
   checksumType  = 'sha256'
   silentArgs    = "/VERYSILENT"
   validExitCodes= @(0, 3010, 1641)

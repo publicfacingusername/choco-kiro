@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>kiro</id>
-    <version>0.1.25</version>
+    <version>0.1.42</version>
     <packageSourceUrl>https://github.com/publicfacingusername/choco-kiro</packageSourceUrl>
     <owners>publicfacingusername</owners>
     <title>Kiro</title>
