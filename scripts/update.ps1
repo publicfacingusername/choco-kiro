@@ -18,19 +18,32 @@ if (-not $release -or -not $release.updateTo -or [string]::IsNullOrWhiteSpace($r
 
 $downloadUrl = $release.updateTo.url
 
-$tempFile = Join-Path $env:TEMP "Kiro-$version.exe"
-Invoke-WebRequest -Uri $downloadUrl -OutFile $tempFile
-$checksum = (Get-FileHash $tempFile -Algorithm SHA256).Hash
-Remove-Item $tempFile
-
 $repoRoot = Split-Path -Parent $PSScriptRoot
-
 $nuspec = Get-ChildItem -Path $repoRoot -Filter 'kiro*.nuspec' | Select-Object -First 1
 if (-not $nuspec) {
   throw 'Could not find a kiro nuspec file.'
 }
 
 $nuspecContent = Get-Content -Path $nuspec.FullName -Raw
+$currentVersionMatch = [regex]::Match($nuspecContent, '<version>([^<]+)</version>')
+$currentVersion = if ($currentVersionMatch.Success) { $currentVersionMatch.Groups[1].Value } else { '' }
+
+$expectedNuspecName = "kiro.$version.nuspec"
+if ($currentVersion -eq $version -and $nuspec.Name -eq $expectedNuspecName) {
+  $installPath = Join-Path $repoRoot 'tools\chocolateyinstall.ps1'
+  $installContent = Get-Content -Path $installPath -Raw
+  $hasDownloadUrl = $installContent -match [regex]::Escape($downloadUrl)
+  if ($hasDownloadUrl) {
+    Write-Host "Kiro is already at $version. No update needed."
+    return
+  }
+}
+
+$tempFile = Join-Path $env:TEMP "Kiro-$version.exe"
+Invoke-WebRequest -Uri $downloadUrl -OutFile $tempFile
+$checksum = (Get-FileHash $tempFile -Algorithm SHA256).Hash
+Remove-Item $tempFile
+
 $updatedNuspec = [regex]::Replace(
   $nuspecContent,
   '<version>[^<]+</version>',
@@ -40,9 +53,8 @@ if ($updatedNuspec -ne $nuspecContent) {
   Set-Content -Path $nuspec.FullName -Value $updatedNuspec -Encoding utf8
 }
 
-$newNuspecName = "kiro.$version.nuspec"
-if ($nuspec.Name -ne $newNuspecName) {
-  Rename-Item -Path $nuspec.FullName -NewName $newNuspecName
+if ($nuspec.Name -ne $expectedNuspecName) {
+  Rename-Item -Path $nuspec.FullName -NewName $expectedNuspecName
 }
 
 $installPath = Join-Path $repoRoot 'tools\chocolateyinstall.ps1'
