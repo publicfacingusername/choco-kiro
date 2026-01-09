@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = 'Stop'
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 $url        = 'https://prod.download.desktop.kiro.dev/releases/stable/win32-x64/signed/0.8.86/kiro-ide-0.8.86-stable-win32-x64.exe'
 
@@ -15,4 +15,5 @@ $packageArgs = @{
 }
 
 Install-ChocolateyPackage @packageArgs # https://docs.chocolatey.org/en-us/create/functions/install-chocolateypackage
+
 
