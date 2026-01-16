@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>kiro</id>
-    <version>0.8.135</version>
+    <version>0.8.140</version>
     <packageSourceUrl>https://github.com/publicfacingusername/choco-kiro</packageSourceUrl>
     <owners>publicfacingusername</owners>
     <title>Kiro</title>
@@ -33,5 +33,6 @@ Kiro supports a variety of programming languages that developers use in their da
     <file src="tools\**" target="tools" />
   </files>
 </package>
+
 
 
