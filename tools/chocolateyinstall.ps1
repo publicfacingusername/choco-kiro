@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$url        = 'https://prod.download.desktop.kiro.dev/releases/stable/win32-x64/signed/0.12.292/kiro-ide-0.12.292-stable-win32-x64.exe'
+$url        = 'https://prod.download.desktop.kiro.dev/releases/stable/win32-x64/signed/0.12.301/kiro-ide-0.12.301-stable-win32-x64.exe'
 
 $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
@@ -8,13 +8,14 @@ $packageArgs = @{
   fileType      = 'exe'
   url           = $url
   softwareName  = 'Kiro*'
-  checksum      = 'B815CA7571E95BF02A22CDA5A1EC99D7D453439D822E3DCA3A0CB94620950762'
+  checksum      = '27CEA71E4429C9B9C03B45FB66ADFC21E73E222AE00DF2386AD20440E0A176C2'
   checksumType  = 'sha256'
   silentArgs    = "/VERYSILENT"
   validExitCodes= @(0, 3010, 1641)
 }
 
 Install-ChocolateyPackage @packageArgs # https://docs.chocolatey.org/en-us/create/functions/install-chocolateypackage
+
 
 
 
