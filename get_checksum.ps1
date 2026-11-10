@@ -1,4 +1,4 @@
-$url = 'https://prod.download.desktop.kiro.dev/releases/stable/win32-x64/signed/1.4.121/kiro-ide-1.4.121-stable-win32-x64.exe'
+$url = 'https://prod.download.desktop.kiro.dev/releases/stable/win32-x64/signed/1.4.154/kiro-ide-1.4.154-stable-win32-x64.exe'
 $f = "$env:TEMP\Kiro.exe"
 Invoke-WebRequest -Uri $url -OutFile $f
 (Get-FileHash $f -Algorithm SHA256).Hash
